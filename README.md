@@ -56,19 +56,23 @@ Enabling javascript on an autocomplete_field:
 
 ## Testing
 
-In your factories for the models with autocomplete_location_id as a foreign key, add this line:
+In your factories.rb, require autocomplete_location gem's factories.
+
+    require 'autocomplete_locations/factories'
+
+For each tables with autocomplete_location_id as a foreign key, add this line:
 
     autocomplete_location_id { create(:autocomplete_locations).id }
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/autocomplete_locations.
+Bug reports and pull requests are welcome on GitHub at https://github.com/elitmus/autocomplete_locations.
 
 Problems:
 What if same city name exist in different states%
