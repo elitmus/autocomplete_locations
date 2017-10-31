@@ -58,6 +58,8 @@ Enabling javascript on an autocomplete_field:
 
 In your factories for the models with autocomplete_location_id as a foreign key, add this line:
 
+    # require 'autocomplete_locations/factories'
+
     autocomplete_location_id { create(:autocomplete_locations).id }
 
 ## Development
