@@ -3,9 +3,9 @@
 #DO NOT change the order of the states
 module AutocompleteLocations
 
-    module StateFindHelper
+    class State < ActiveRecord::Base
 
-      $states = {
+      @@states = {
         "Andaman and Nicobar"=>"0",
         "Andhra Pradesh"=>"1",
         "Arunachal Pradesh"=>"2",
@@ -45,20 +45,20 @@ module AutocompleteLocations
       }
 
       def state_select(label, *args)
-        select(label,$states.sort,*args)
+        select(label,@@states.sort,*args)
       end
 
       def state_select_tag(label,selected,*args)
         select_tag(label,"<option value=''>---please select---</option>".html_safe+
-            options_for_select($states.sort,selected),*args)
+            options_for_select(@@states.sort,selected),*args)
       end
 
       def self.state_name(id)
-        (id.blank? ? "" : $states.key(id.to_s).to_s)
+        (id.blank? ? "" : @@states.key(id.to_s).to_s)
       end
 
       def self.state_id(name)
-        (name.blank? ? "" : $states[name.to_s].to_s)
+        (name.blank? ? "" : @@states[name.to_s].to_s)
       end
 
     end
