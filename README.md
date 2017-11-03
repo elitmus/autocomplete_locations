@@ -47,7 +47,11 @@ If the table is already populated with some city name:
 
 For a model having autocomplete_location_id, search query can be concatenated for finding cities with same city_id:
 
-    ModelNAme.at_city_id(autocomplete_location_id, location) #location is the city name, which is optional
+    ModelName.at_city_id(autocomplete_location_id)
+
+But before saving or searching using the city_id obtained from the form, validate it's location first and then fetch id again using:
+
+    ModelName.city_id(location_column_value) #use this autocomplete_location_id
 
 Enabling javascript on an autocomplete_field:
 
