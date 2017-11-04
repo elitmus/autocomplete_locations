@@ -13,7 +13,7 @@ module AutocompleteLocations
       end
 
       def self.at_city_id(id)
-        where(autocomplete_location_id: AutocompleteLocation.city_name_ids(id))
+        id ? where(autocomplete_location_id: AutocompleteLocation.city_name_ids(id)) : where(nil)
       end
 
       def self.city_id(city, state=nil)
