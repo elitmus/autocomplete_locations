@@ -4,7 +4,7 @@ jQuery.fn.extend({
 
   locationAutocomplete: function(sourceData, city_id_field, city_field, state_field) {
     var element = $(this);
-    var api_key = "AIzaSyCZKYyehirTIx6_ELgPSzbJkxw3kuW6k-0";
+    var api_key = "<%= AutocompleteLocations.configuration.google_places_api_key.html_safe %>";
     $.getScript("https://maps.googleapis.com/maps/api/js?libraries=places&key="+api_key, function() {
       google.maps.event.addDomListener(window, "load", function(){});
     }); //&callback=fooBarFunction
@@ -39,7 +39,6 @@ jQuery.fn.extend({
           // Fire maps places API event, by
           element.blur();
           setTimeout(function(){ element.focus(); }, 300);
-          console.log("Map loaded!");
      } catch(err) {
         console.log(err);
         console.log("Unable to load Google Map");
@@ -48,7 +47,6 @@ jQuery.fn.extend({
 
 
   var setLocation = function(city_id, city, state) {
-    console.log("City id: "+city_id);
     $(city_id_field).val(city_id);
     $(city_field).val(city);
     $(state_field).filter(function() {
