@@ -35,6 +35,25 @@ Run rake task:
     $ rake db:migrate
     $ rake location_fixes:update_locations
 
+
+## Dependencies
+
+Add these lines if they don't exist
+
+In your Gemfile
+
+    gem 'jquery-rails'
+    gem 'jquery-ui-rails'
+
+In your application.js
+
+    //= require jquery
+    //= require jquery-ui 
+
+And in application.css
+
+     *= require jquery-ui
+
 ## Usage
 
 To add location as a reference to your table:
