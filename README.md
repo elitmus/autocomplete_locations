@@ -9,16 +9,12 @@ TODO: Delete this and the text above, and describe your gem
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'autocomplete_locations'
+gem 'autocomplete_locations', github: 'https://github.com/elitmus/autocomplete_locations', branch: 'master'
 ```
 
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install autocomplete_locations
 
 Mount it in routes.rb:
 
