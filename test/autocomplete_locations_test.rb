@@ -1,4 +1,3 @@
-require 'test_helper'
 
 class AutocompleteLocations::Test < ActiveSupport::TestCase
   test "truth" do
