@@ -14,5 +14,23 @@ module AutocompleteLocations
       same_city_names(id).select(:id)
     end
 
+    def is_default_city?
+      searched_city = "#{self[:city]}, #{AutocompleteLocations::State.state_name(self[:state])}"
+      AutocompleteLocations.current_city_name?(searched_city) == self[:city]
+    end
+
+    def self.default_city(id)
+      default_city = AutocompleteLocation.find_by(city_id: AutocompleteLocation.find(id).city_id, default_city: true)
+      default_city || AutocompleteLocation.find(id)
+    end
+
+    def self.current_city_name?(query)
+      # Try query with city name and state both. Ex: query = 'Aurangabad, Uttar Pradesh'
+      searched_city = Geocoder.search query
+      searched_city[0].data['address_components'].each do |options|
+        return options['long_name'] if options['types'].include?('locality') && options['types'].include?('political')
+      end
+      return nil
+    end
   end
 end

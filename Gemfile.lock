@@ -2,7 +2,9 @@ PATH
   remote: .
   specs:
     autocomplete_locations (0.1.9)
+      geocoder
       rails
+      redis
 
 GEM
   remote: https://rubygems.org/
@@ -55,6 +57,7 @@ GEM
     erubi (1.7.1)
     factory_bot (4.11.1)
       activesupport (>= 3.0.0)
+    geocoder (1.5.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     i18n (1.1.0)
@@ -102,6 +105,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.19.0, < 2.0)
     rake (12.3.1)
+    redis (4.0.2)
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -125,4 +129,4 @@ DEPENDENCIES
   factory_bot
 
 BUNDLED WITH
-   1.16.4
+   1.16.2

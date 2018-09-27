@@ -23,6 +23,52 @@ namespace :location_fixes do
     puts "===============ended at #{Time.now}==============="
   end
 
+  desc 'Update default_cities'
+  task update_default_cities: :environment do
+    puts "===============started at #{Time.now}==============="
+    cities = AutocompleteLocations::AutocompleteLocation.all
+    cities.each_with_index do |city, index|
+
+      # print "Updating default cities (#{index+1}/#{cities.count})...\r"
+      puts "City: #{city[:city]}"
+      begin
+        default_searched_city = "#{city[:city]}, #{AutocompleteLocations::State.state_name(city[:state])}"
+        default_searched_city = AutocompleteLocations::AutocompleteLocation.current_city_name? default_searched_city
+
+        current_default_city = default_searched_city.nil? || default_searched_city == city[:city] ?
+                              city : AutocompleteLocations::AutocompleteLocation.find_by(city: default_searched_city, state: city[:state])
+
+        if current_default_city
+          unless current_default_city[:default_city]
+            current_default_city[:default_city] = true
+            current_default_city.save
+          end
+          if city[:city] != current_default_city[:city] && (city[:default_city] or city[:city_id] != current_default_city[:city_id])
+            city[:default_city] = false
+            city[:city_id] = current_default_city[:city_id]
+            city.save
+          end
+        else
+          current_default_city = city.as_json.symbolize_keys
+          current_default_city.delete(:id)
+          current_default_city[:city] = default_searched_city
+          current_default_city[:default_city] = true
+          current_default_city = AutocompleteLocations::AutocompleteLocation.create(current_default_city)
+          city[:default_city] = false
+          city[:city_id] = current_default_city[:city_id]
+          city.save
+        end
+
+      rescue Exception => e
+        puts "Couldn't update #{city[:city]}!"
+        puts e
+      end
+      puts "Default City: #{current_default_city[:city]}"
+      puts "="*30
+    end
+    puts "===============ended at #{Time.now}==============="
+  end
+
   desc "Update locations."
   task update_locations: :environment do
     puts "===============started at #{Time.now}==============="

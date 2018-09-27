@@ -34,6 +34,7 @@ Run rake task:
     $ rake location_fixes:init_autocomplete_locations_module
     $ rake db:migrate
     $ rake location_fixes:update_locations
+    $ rake location_fixes:update_default_cities
 
 ## Usage
 
