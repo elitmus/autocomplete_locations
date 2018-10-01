@@ -44,7 +44,7 @@ In your Gemfile
 In your application.js
 
     //= require jquery
-    //= require jquery-ui 
+    //= require jquery-ui
 
 And in application.css
 
